@@ -13,9 +13,9 @@ class TvSeriesSpider(scrapy.Spider):
             yield response.follow(url, self.parse_series)
 
         # Xử lý trang tiếp theo
-        # next_page = response.css('a.page-link[aria-label="Next"]::attr(href)').get()
-        # if next_page:
-        #     yield response.follow(next_page, self.parse)
+        next_page = response.css('a.page-link[aria-label="Next"]::attr(href)').get()
+        if next_page:
+            yield response.follow(next_page, self.parse)
 
     def parse_series(self, response):
         # Create an instance of CrawlfilmItem

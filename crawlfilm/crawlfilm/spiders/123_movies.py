@@ -13,9 +13,9 @@ class MovieSpider(scrapy.Spider):
             yield response.follow(url, self.parse_movie)
                 # Xử lý trang tiếp theo
         # Xử lý trang tiếp theo
-        # next_page = response.css('a.page-link[aria-label="Next"]::attr(href)').get()  # Tìm đường dẫn đến trang tiếp theo
-        # if next_page:
-        #     yield response.follow(next_page, self.parse)  # Tiếp tục crawl trang tiếp theo
+        next_page = response.css('a.page-link[aria-label="Next"]::attr(href)').get()  # Tìm đường dẫn đến trang tiếp theo
+        if next_page:
+            yield response.follow(next_page, self.parse)  # Tiếp tục crawl trang tiếp theo
 
     def parse_movie(self, response):
         # Create an instance of CrawlfilmItem
